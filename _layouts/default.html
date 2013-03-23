@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>{% if page.title %}{{ page.title }} - {% endif %}PHP之道</title>
+        <meta name="description" content="{{ page.description }}"/>
+        <meta name="robots" content="index,follow,archive"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <link rel="stylesheet" href="styles/all.css"/>
+        <link rel="stylesheet" href="styles/syntax.css"/>
+    </head>
+    <body>
+        <nav class="site-navigation">
+            <div class="build-date">Last Updated: {{ site.time }}</div>
+            <ul>
+                <li><a href="/php#site-header">Welcome</a></li>
+                {% assign lastIsChild = false %}
+                {% for post in site.posts reversed %}
+                    {% if post.isChild and lastIsChild != true %}<ul>{% endif %}
+                    {% if lastIsChild and post.isChild != true %}</ul>{% endif %}
+                    {% if post.anchorid %}
+                    <li><a href="/php#{{ post.anchorid }}">{{ post.title }}</a>
+                    {% else %}
+                    <li><a href="/php#{{ post.title | downcase | replace:' ','_' | replace:'(','' | replace:')','' | replace:'.','' | replace:'-','' }}">{{ post.title }}</a>
+                    {% endif %}                                        
+                    {% assign lastIsChild = post.isChild %}
+                {% endfor %}
+                <li><a href="/php#site-footer">Credits</a></li>
+            </ul>
+        </nav>
+        <div class="site-content">
+
+			<header class="site-header" id="site-header">
+                    <h1 class="site-title"><a href="/php">PHP之道</a></h1>
+                翻译：wulijun&nbsp;&nbsp;<a href="http://higrid.net/" target="_blank">在线图表higrid.net</a>提供分流
+            </header>
+            {{ content }}
+            <footer class="site-footer" id="site-footer">
+
+                <p>
+                    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">PHP: The Right Way</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.twitter.com/codeguy" property="cc:attributionName" rel="cc:attributionURL">Josh Lockhart</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://www.phptherightway.com" rel="dct:source">www.phptherightway.com</a>.
+                </p>
+            </footer>
+        </div>
+
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js"></script>
+        <script src="scripts/setup.js"></script>
+
+
+<!--HIGRID GOOGLE STATS -->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fe800be547df3ec1416d26a49a98b6f44' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript" src="http://higrid.net/include/js/statgoogle.js"  charset="utf-8"></script>
+<script src="http://s20.cnzz.com/stat.php?id=3552716&web_id=3552716" language="javascript"></script>
+</div>
+
+
+    </body>
+</html>
